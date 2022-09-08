@@ -17,6 +17,12 @@
     - ansible.builtin.debug:
         var: priv_key.stdout_lines
 
+    - ansible.builtin.file:
+        path: "{{ secret_key }}"
+        mode: 0600
+
+    - ansible.builtin.shell: ssh-add {{ secret_key }}
+
     - name: Clone the infrastructure code repository
       ansible.builtin.git:
         repo: "{{ git_repo }}"
