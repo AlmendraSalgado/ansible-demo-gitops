@@ -3,10 +3,10 @@
 
   tasks:
     - ansible.builtin.debug:
-        var: awx_webhook_payload.repository.default_branch
+        msg: "{{ awx_webhook_payload.repository.default_branch.split('/')[2] }}"
 
     - ansible.builtin.set_fact:
-        env: "{{ awx_webhook_payload.repository.default_branch }}"
+        env: "{{ awx_webhook_payload.repository.default_branch.split('/')[2] }}"
     
     - ansible.builtin.include_vars:
         file: ./vars/{{ env }}.yaml
