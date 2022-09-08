@@ -6,7 +6,7 @@
         var: awx_webhook_payload.repository.default_branch
 
     - ansible.builtin.set_fact:
-        env: awx_webhook_payload.repository.default_branch
+        env: "{{ awx_webhook_payload.repository.default_branch }}"
     
     - ansible.builtin.include_vars:
         file: ./vars/{{ env }}.yaml
