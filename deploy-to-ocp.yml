@@ -11,13 +11,16 @@
     - ansible.builtin.include_vars:
         file: ./vars/{{ env }}.yaml
 
+    - command: cat {{ secret_key }}
+      register: priv_key
+
     - ansible.builtin.debug:
-        var: secret_key
+        var: priv_key.stdout_lines
 
     - name: Clone the infrastructure code repository
       ansible.builtin.git:
         repo: "{{ git_repo }}"
-        dest: "{{ ansible_env.HOME }}"
+        dest: "{{ ansible_env.HOME }}/git-fevermap"
         accept_hostkey: yes
         key_file: "{{ secret_key }}"
         single_branch: yes
