@@ -11,6 +11,9 @@
     - ansible.builtin.include_vars:
         file: ./vars/{{ env }}.yaml
 
+    - ansible.builtin.debug:
+        var: secret_key
+
     - name: Clone the infrastructure code repository
       ansible.builtin.git:
         repo: "{{ git_repo }}"
