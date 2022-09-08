@@ -11,15 +11,25 @@
     - ansible.builtin.include_vars:
         file: ./vars/{{ env }}.yaml
 
-    # - name: Create project on Openshift
+    - name: Clone the infrastructure code repository
+      ansible.builtin.git:
+        repo: "{{ git_repo }}"
+        dest: "{{ ansible_env.HOME }}"
+        accept_hostkey: yes
+        key_file: "{{ secret_key }}"
+
+    - name: Create project on Openshift
+      kubernetes.core.k8s:
+        kind: Namespace
+        name: "{{ namespace }}"
+        state: "{{ state }}"
+        api_version: v1
+        metadata:
+        annotations:
+            openshift.io/description: "{{ namespace_description }}"
+            openshift.io/display-name: "{{ namespace_display_name }}"
+
+    # - name: Create template on Openshift project
     #   kubernetes.core.k8s:
-    #     kind: Namespace
-    #     name: "{{ namespace }}"
     #     state: "{{ state }}"
-    #     api_version: v1
-    #     metadata:
-    #       annotations:
-    #         openshift.io/description: "{{ namespace_description }}"
-    #         openshift.io/display-name: "{{ namespace_display_name }}"
-    #       name: "{{ namespace }}"
-    
+    #     src: "{{ ansible_env.HOME }}/template-fevermap.yaml"
