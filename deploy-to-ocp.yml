@@ -17,6 +17,8 @@
         dest: "{{ ansible_env.HOME }}"
         accept_hostkey: yes
         key_file: "{{ secret_key }}"
+        single_branch: yes
+        version: "{{ env }}"
 
     - name: Create project on Openshift
       kubernetes.core.k8s:
