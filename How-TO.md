@@ -4,7 +4,7 @@
 
 ## Access and explore playbooks repository
 
-We have (1) collections folder, where we define the collections and roles requirementes for the execution of the playbooks in this repository.
+We have (1) collections folder, where we define the collections and roles requirements for the execution of the playbooks in this repository.
 
 We also have (1) variables folder, that contains one file per environment, setting the specific variables for stagging and production.  
 
