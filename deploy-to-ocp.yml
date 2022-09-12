@@ -21,7 +21,7 @@
         path: "{{ secret_key }}"
         mode: 0600
 
-    - ansible.builtin.shell: ssh-add {{ secret_key }}
+    - ansible.builtin.command: ssh-add {{ secret_key }}
 
     - name: Clone the infrastructure code repository
       ansible.builtin.git:
@@ -32,16 +32,16 @@
         single_branch: yes
         version: "{{ env }}"
 
-    - name: Create project on Openshift
-      kubernetes.core.k8s:
-        kind: Namespace
-        name: "{{ namespace }}"
-        state: "{{ state }}"
-        api_version: v1
-        metadata:
-        annotations:
-            openshift.io/description: "{{ namespace_description }}"
-            openshift.io/display-name: "{{ namespace_display_name }}"
+    # - name: Create project on Openshift
+    #   kubernetes.core.k8s:
+    #     kind: Namespace
+    #     name: "{{ namespace }}"
+    #     state: "{{ state }}"
+    #     api_version: v1
+    #     metadata:
+    #     annotations:
+    #         openshift.io/description: "{{ namespace_description }}"
+    #         openshift.io/display-name: "{{ namespace_display_name }}"
 
     # - name: Create template on Openshift project
     #   kubernetes.core.k8s:
