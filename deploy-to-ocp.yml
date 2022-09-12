@@ -21,7 +21,7 @@
         path: "{{ secret_key }}"
         mode: 0600
 
-    - ansible.builtin.command: ssh-add {{ secret_key }}
+    # - ansible.builtin.command: ssh-add {{ secret_key }}
 
     - name: Clone the infrastructure code repository
       ansible.builtin.git:
