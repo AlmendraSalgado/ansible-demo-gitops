@@ -21,6 +21,9 @@
         path: "{{ secret_key }}"
         mode: 0600
 
+    - ansible.builtin.command: mv {{ secret_key }} {{ secret_key }}.pem
+
+
     # - ansible.builtin.command: ssh-add {{ secret_key }}
 
     - name: Clone the infrastructure code repository
@@ -28,7 +31,7 @@
         repo: "{{ git_repo }}"
         dest: "{{ ansible_env.HOME }}/git-fevermap"
         accept_hostkey: yes
-        key_file: "{{ secret_key }}"
+        key_file: "{{ secret_key }}.pem"
         single_branch: yes
         version: "{{ env }}"
 
