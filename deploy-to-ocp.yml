@@ -29,6 +29,8 @@
 
 
     - ansible.builtin.shell: ssh-add {{ secret_key }}
+      args:
+        executable: /bin/bash
 
     - name: Clone the infrastructure code repository
       ansible.builtin.git:
