@@ -23,16 +23,15 @@
         single_branch: yes
         version: "{{ env }}"
 
-    - name: Create project on Openshift
+    - name: Copy namespace yaml creation
+      ansible.builtin.template:
+        src: namespace.yaml.j2
+        dest: "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
+
+    - name: Create Openshift project
       kubernetes.core.k8s:
-        kind: Namespace
-        name: "{{ namespace }}"
         state: "{{ state }}"
-        api_version: v1
-        metadata:
-        annotations:
-            openshift.io/description: "{{ namespace_description }}"
-            openshift.io/display-name: "{{ namespace_display_name }}"
+        src: "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
 
     - name: Create template on Openshift project
       kubernetes.core.k8s:
