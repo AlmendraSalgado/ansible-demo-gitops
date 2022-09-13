@@ -1,12 +1,14 @@
 ---
 - hosts: all
+  vars:
+    env: stagging
 
   tasks:
-    - ansible.builtin.debug:
-        msg: "{{ awx_webhook_payload.ref.split('/')[2] }}"
+    # - ansible.builtin.debug:
+    #     msg: "{{ awx_webhook_payload.ref.split('/')[2] }}"
 
-    - ansible.builtin.set_fact:
-        env: "{{ awx_webhook_payload.ref.split('/')[2] }}"
+    # - ansible.builtin.set_fact:
+    #     env: "{{ awx_webhook_payload.ref.split('/')[2] }}"
     
     - ansible.builtin.include_vars:
         file: ./vars/{{ env }}.yaml
@@ -21,10 +23,10 @@
         path: "{{ secret_key }}"
         mode: 0600
 
-    - ansible.builtin.command: mv {{ secret_key }} {{ secret_key }}.pem
+    - ansible.builtin.command: eval `ssh-agent -s`
 
 
-    # - ansible.builtin.command: ssh-add {{ secret_key }}
+    - ansible.builtin.command: ssh-add {{ secret_key }}
 
     - name: Clone the infrastructure code repository
       ansible.builtin.git:
