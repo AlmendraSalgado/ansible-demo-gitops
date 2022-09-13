@@ -9,11 +9,12 @@
 
     # - ansible.builtin.set_fact:
     #     env: "{{ awx_webhook_payload.ref.split('/')[2] }}"
-    
+
     - ansible.builtin.include_vars:
-        file: 
-          - ./vars/{{ env }}.yaml
-          - ./vars/git_credentials.yaml
+        file: ./vars/git_credentials.yaml
+
+    - ansible.builtin.include_vars:
+        file: ./vars/{{ env }}.yaml
 
     # - command: cat {{ secret_key }}
     #   register: priv_key
