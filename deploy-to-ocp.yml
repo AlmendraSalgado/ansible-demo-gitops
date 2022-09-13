@@ -23,10 +23,12 @@
         path: "{{ secret_key }}"
         mode: 0600
 
-    - ansible.builtin.command: eval `ssh-agent -s`
+    - ansible.builtin.shell: eval `ssh-agent -s`
+      args:
+        executable: /bin/bash
 
 
-    - ansible.builtin.command: ssh-add {{ secret_key }}
+    - ansible.builtin.shell: ssh-add {{ secret_key }}
 
     - name: Clone the infrastructure code repository
       ansible.builtin.git:
