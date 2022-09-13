@@ -11,26 +11,28 @@
     #     env: "{{ awx_webhook_payload.ref.split('/')[2] }}"
     
     - ansible.builtin.include_vars:
-        file: ./vars/{{ env }}.yaml
+        file: 
+          - ./vars/{{ env }}.yaml
+          - ./vars/git_credentials.yaml
 
-    - command: cat {{ secret_key }}
-      register: priv_key
+    # - command: cat {{ secret_key }}
+    #   register: priv_key
 
-    - ansible.builtin.debug:
-        var: priv_key.stdout_lines
+    # - ansible.builtin.debug:
+    #     var: priv_key.stdout_lines
 
-    - ansible.builtin.file:
-        path: "{{ secret_key }}"
-        mode: 0600
+    # - ansible.builtin.file:
+    #     path: "{{ secret_key }}"
+    #     mode: 0600
 
-    - ansible.builtin.shell: eval `ssh-agent -s`
-      args:
-        executable: /bin/bash
+    # - ansible.builtin.shell: eval `ssh-agent -s`
+    #   args:
+    #     executable: /bin/bash
 
 
-    - ansible.builtin.shell: ssh-add {{ secret_key }}
-      args:
-        executable: /bin/bash
+    # - ansible.builtin.shell: ssh-add {{ secret_key }}
+    #   args:
+    #     executable: /bin/bash
 
     - name: Clone the infrastructure code repository
       ansible.builtin.git:
