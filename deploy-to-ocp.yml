@@ -39,8 +39,8 @@
       ansible.builtin.git:
         repo: "{{ git_repo }}"
         dest: "{{ ansible_env.HOME }}/git-fevermap"
-        accept_hostkey: yes
-        key_file: "{{ secret_key }}.pem"
+        # accept_hostkey: yes
+        # key_file: "{{ secret_key }}.pem"
         single_branch: yes
         version: "{{ env }}"
 
