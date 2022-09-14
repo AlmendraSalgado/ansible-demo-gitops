@@ -75,6 +75,6 @@ After saving the template, we can see ```Webhook URL``` and ```Webhook Key``` an
 
 ### Playbook Git Clone
 
-To be able to clone the Infrastructure as Code repository, inside of our playbook we use the ansible git module. In this case we will need to use the private key to clone it, but AAP doesn't have by default a way to pass a GitHub credential to the playbook execution. Instead, we have to create a custom credential to add it to the job template following this guide: https://termlen0.github.io/2019/06/08/observations/
+To be able to clone the Infrastructure as Code repository, inside of our playbook we use the ansible git module. In this case we will need to use the private key to clone it, 
 
 
