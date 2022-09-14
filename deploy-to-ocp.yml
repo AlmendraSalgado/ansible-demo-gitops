@@ -2,11 +2,11 @@
 - hosts: all
 
   tasks:
-    - ansible.builtin.debug:
-        msg: "{{ awx_webhook_payload.ref.split('/')[2] }}"
+    # - ansible.builtin.debug:
+    #     msg: "{{ awx_webhook_payload.ref.split('/')[2] }}"
 
-    - ansible.builtin.set_fact:
-        env: "{{ awx_webhook_payload.ref.split('/')[2] }}"
+    # - ansible.builtin.set_fact:
+    #     env: "{{ awx_webhook_payload.ref.split('/')[2] }}"
 
     - ansible.builtin.include_vars:
         file: ./vars/git_credentials.yaml
