@@ -26,12 +26,6 @@
         src: namespace.yaml.j2
         dest: "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
 
-    - ansible.builtin.command: cat  "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
-      register: project_template
-
-    - ansible.builtin.debug:
-        var: project_template.stdout_lines
-
     - name: Get Openshift projects
       kubernetes.core.k8s_info:
         kind: Project
@@ -48,6 +42,18 @@
       kubernetes.core.k8s:
         state: "{{ state }}"
         src: "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
+
+    - name: add label to existing namespace
+      kubernetes.core.k8s:
+        state: patched
+        kind: Project
+        api_version: "project.openshift.io/v1"
+        name: "{{ namespace }}"
+        definition:
+          metadata:
+            labels:
+              app: "{{ application_name }}"
+              env: "{{ env }}"
 
     - name: Create template on Openshift project
       kubernetes.core.k8s:
