@@ -33,25 +33,11 @@
         name: "{{ namespace }}"
       register: project_status
 
-    - ansible.builtin.debug:
-        var: project_status
-
     - name: Create Openshift project
       kubernetes.core.k8s:
         state: "{{ state }}"
         src: "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
-      when: project_status.api_found == False
-
-    # - name: add label to existing namespace
-    #   kubernetes.core.k8s:
-    #     state: patched
-    #     kind: Namespace
-    #     name: "{{ namespace }}"
-    #     definition:
-    #       metadata:
-    #         labels:
-    #           app: "{{ application_name }}"
-    #           env: "{{ env }}"
+      when: '"cannot get resource" in {{ project_status.msg }}'
 
     - name: Create template on Openshift project
       kubernetes.core.k8s:
