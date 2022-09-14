@@ -37,7 +37,7 @@
       kubernetes.core.k8s:
         state: "{{ state }}"
         src: "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
-      when: project_status.resources[0].status.phase == "Active"
+      when: project_status.resources == []
       
     - name: Create template on Openshift project
       kubernetes.core.k8s:
