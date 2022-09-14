@@ -5,3 +5,5 @@ namespace_description: |
   of coronavirus cases in real-time before people actually get tested.
 namespace_display_name: "{{ env }} environment for Fevermap app"
 
+application_name: fevermap
+

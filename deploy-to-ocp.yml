@@ -26,6 +26,17 @@
         src: namespace.yaml.j2
         dest: "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
 
+    - name: Get Openshift projects
+      kubernetes.core.k8s_info:
+        kind: Project
+        label_selectors:
+          - "app = {{ application_name }}"
+          - "env = {{ env }}"
+      register: project_status
+
+    - ansible.builtin.debug:
+        var: project_status
+
     - name: Create Openshift project
       kubernetes.core.k8s:
         state: "{{ state }}"
