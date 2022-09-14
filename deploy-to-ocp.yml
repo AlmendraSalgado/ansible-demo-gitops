@@ -46,8 +46,7 @@
     - name: add label to existing namespace
       kubernetes.core.k8s:
         state: patched
-        kind: Project
-        api_version: "project.openshift.io/v1"
+        kind: Namespace
         name: "{{ namespace }}"
         definition:
           metadata:
