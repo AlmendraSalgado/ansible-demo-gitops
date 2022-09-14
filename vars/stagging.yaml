@@ -7,3 +7,8 @@ namespace_display_name: "{{ env }} environment for Fevermap app"
 
 application_name: fevermap
 
+template_name: fevermap-mysql-persistent
+template_parameters:
+  NAMESPACE: "{{ namespace }}"
+  NAME: "{{ application_name }}"
+
