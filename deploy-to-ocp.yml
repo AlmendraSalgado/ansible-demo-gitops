@@ -52,3 +52,11 @@
         parameters: "{{ template_parameters }}"
         state: rendered
       register: result
+
+    - name: Create the rendered resources using apply
+      community.okd.k8s:
+        namespace: "{{ namespace }}"
+        definition: '{{ item }}'
+        wait: yes
+        apply: yes
+      loop: '{{ result.resources }}'
