@@ -43,4 +43,4 @@
       kubernetes.core.k8s:
         state: "{{ state }}"
         src: "{{ ansible_env.HOME }}/git-fevermap/template-fevermap.yaml"
-        namespace: 
+        namespace: "{{ namespace }}"
