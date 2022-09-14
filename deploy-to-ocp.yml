@@ -30,9 +30,7 @@
       kubernetes.core.k8s_info:
         kind: Project
         api_version: "project.openshift.io/v1"
-        label_selectors:
-          - "app = {{ application_name }}"
-          - "env = {{ env }}"
+        name: "{{ namespace }}"
       register: project_status
 
     - ansible.builtin.debug:
@@ -43,16 +41,16 @@
         state: "{{ state }}"
         src: "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
 
-    - name: add label to existing namespace
-      kubernetes.core.k8s:
-        state: patched
-        kind: Namespace
-        name: "{{ namespace }}"
-        definition:
-          metadata:
-            labels:
-              app: "{{ application_name }}"
-              env: "{{ env }}"
+    # - name: add label to existing namespace
+    #   kubernetes.core.k8s:
+    #     state: patched
+    #     kind: Namespace
+    #     name: "{{ namespace }}"
+    #     definition:
+    #       metadata:
+    #         labels:
+    #           app: "{{ application_name }}"
+    #           env: "{{ env }}"
 
     - name: Create template on Openshift project
       kubernetes.core.k8s:
