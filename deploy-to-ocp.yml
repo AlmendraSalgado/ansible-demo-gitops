@@ -29,6 +29,7 @@
     - name: Get Openshift projects
       kubernetes.core.k8s_info:
         kind: Project
+        api_version: "project.openshift.io/v1"
         label_selectors:
           - "app = {{ application_name }}"
           - "env = {{ env }}"
