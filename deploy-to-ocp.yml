@@ -40,6 +40,7 @@
       kubernetes.core.k8s:
         state: "{{ state }}"
         src: "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
+      when: project_status.api_found == False
 
     # - name: add label to existing namespace
     #   kubernetes.core.k8s:
