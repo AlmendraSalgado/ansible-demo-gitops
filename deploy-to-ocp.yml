@@ -1,7 +1,5 @@
 ---
 - hosts: all
-  vars:
-    env: stagging
 
   tasks:
     - ansible.builtin.debug:
