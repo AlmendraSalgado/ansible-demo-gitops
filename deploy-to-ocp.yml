@@ -26,6 +26,12 @@
         src: namespace.yaml.j2
         dest: "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
 
+    - ansible.built.command: cat  "{{ ansible_env.HOME }}/git-fevermap/namespace.yaml"
+      register: project_template
+
+    - ansible.builtin.debug:
+        var: project_template.stdout_lines
+
     - name: Get Openshift projects
       kubernetes.core.k8s_info:
         kind: Project
