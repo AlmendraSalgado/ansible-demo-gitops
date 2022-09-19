@@ -63,6 +63,7 @@
 
     - name: redhat.io pull secret
       kubernetes.core.k8s:
+        namespace: "{{ namespace }}"
         state: "{{ state }}"
         definition:
           apiVersion: v1
