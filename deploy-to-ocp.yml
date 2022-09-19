@@ -62,18 +62,18 @@
       loop: '{{ result.resources }}'
 
     - name: redhat.io pull secret
-        k8s:
-          state: "{{ state }}"
-          definition:
-            apiVersion: v1
-            kind: Secret
-            metadata:
-              labels:
-                app: "{{ application_name }}"
-                env: "{{ env }}"
-              name: registry-redhat-io-secret
-            type: kubernetes.io/dockerconfigjson
-            data:
-              .dockerconfigjson: "{{ redhat_io_pull_token }}"
+      kubernetes.core.k8s:
+        state: "{{ state }}"
+        definition:
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            labels:
+              app: "{{ application_name }}"
+              env: "{{ env }}"
+            name: registry-redhat-io-secret
+          type: kubernetes.io/dockerconfigjson
+          data:
+            .dockerconfigjson: "{{ redhat_io_pull_token }}"
         
         
