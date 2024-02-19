@@ -1,6 +1,6 @@
 ---
 namespace: fevermap-{{ env }}
-namespace_description: | 
+namespace_description: |
   FeverMap is a mobile application that helps in tracking the spread 
   of coronavirus cases in real-time before people actually get tested.
 namespace_display_name: "{{ env }} environment for Fevermap app"
@@ -11,4 +11,3 @@ template_name: fevermap-mysql-persistent
 template_parameters:
   NAMESPACE: "{{ namespace }}"
   NAME: "{{ application_name }}"
-

@@ -20,7 +20,7 @@
       ansible.builtin.git:
         repo: "{{ git_repo }}"
         dest: "{{ ansible_env.HOME }}/git-fevermap"
-        single_branch: yes
+        single_branch: true
         version: "{{ env }}"
 
     - name: Copy namespace yaml creation
@@ -31,7 +31,7 @@
     - name: Get Openshift projects
       kubernetes.core.k8s_info:
         kind: Project
-        api_version: "project.openshift.io/v1"
+        api_version: project.openshift.io/v1
         name: "{{ namespace }}"
       register: project_status
 
@@ -58,10 +58,10 @@
     - name: Create the rendered resources using apply
       community.okd.k8s:
         namespace: "{{ namespace }}"
-        definition: '{{ item }}'
-        wait: yes
-        apply: yes
-      loop: '{{ result.resources }}'
+        definition: "{{ item }}"
+        wait: true
+        apply: true
+      loop: "{{ result.resources }}"
 
     - name: redhat.io pull secret
       kubernetes.core.k8s:
@@ -78,5 +78,3 @@
           type: kubernetes.io/dockerconfigjson
           data:
             .dockerconfigjson: "{{ redhat_io_pull_token }}"
-        
-        
