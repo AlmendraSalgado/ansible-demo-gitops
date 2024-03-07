@@ -1,4 +1,4 @@
 ---
 collections:
-- name: kubernetes.core
-- name: community.okd
+  - name: kubernetes.core
+  - name: community.okd
